@@ -9,4 +9,4 @@ def latlong2dis(x1,x2):
     x2 = [radians(x) for x in x2]
 
     
-    return geopy.distance.geodesic(x1,x2).km
+    return int(geopy.distance.geodesic(x1,x2).km)
