@@ -2,6 +2,7 @@ from __future__ import print_function
 from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 import pandas as pd
+from geolocation import latlong2dis
 
 
 
@@ -22,12 +23,36 @@ def read_excel(filename):
 
     print(len(dictname))
 
+    return dictname
+
+
+def create_distmat(dictname):
+    ''' Here dictname is the name of the full location
+    and id is the actual warehouse location'''
+    listadd = []
+    for k,v in dictname.items():
+        listadd.append([k,v])
+
+    # length of list
+    m = len(listadd)
+
+    finallist = [[0 for i in range(m)]for i in range(m)]
+
+    for i in range(m):
+        for j in range(m):
+            print(listadd[i][1],listadd[j][1])
+            finallist[i][j] = latlong2dis(listadd[i][1],listadd[j][1])
     
+    return finallist
 
     
-    
 
-read_excel('Buyer Locations.XLSX')
+x = read_excel('Sellers Location.XLSX')
+
+
+datamat = create_distmat(x)
+
+print(datamat)
 
 
 def create_data_model():
