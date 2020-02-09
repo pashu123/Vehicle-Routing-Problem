@@ -7,11 +7,27 @@ import pandas as pd
 
 def read_excel(filename):
     '''Reads the excel file and gives the coordinate of the seller'''
-    pd.read_excel(filename)
-    print(pd.info())
+    df = pd.read_excel(filename)
+    print(df.info())
+    df = df[['name','latitude','longitude']]
+    print(df.info())
+    print(df.head())
+
+    df = df.values
+
+    dictname = {}
+
+    for i in df:
+        dictname[i[0]] = [i[1],i[2]]
+
+    print(len(dictname))
+
     
 
-read_excel('Buyer Location')
+    
+    
+
+read_excel('Buyer Locations.XLSX')
 
 
 def create_data_model():
